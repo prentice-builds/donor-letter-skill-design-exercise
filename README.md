@@ -5,7 +5,9 @@ A design exercise. I took a drafted AI agent skill for writing donor outreach le
 ## Repo map
 
 - [`ASSESSMENT.md`](ASSESSMENT.md). The issues in the original draft, listed most serious first, and the rewritten description line.
-- [`donor-letter-drafting/`](donor-letter-drafting). The full rewrite. [`SKILL.md`](donor-letter-drafting/SKILL.md) holds the instructions, [`scripts/calculate_ask.py`](donor-letter-drafting/scripts/calculate_ask.py) holds the math, and [`examples/`](donor-letter-drafting/examples) holds test data and verified outputs.
+- [`SKILL.md`](SKILL.md). The full rewrite, the instructions the agent follows.
+- [`scripts/calculate_ask.py`](scripts/calculate_ask.py). The math, kept in code so the same donor always gets the same number.
+- [`examples/`](examples). Test data and verified outputs.
 
 The original draft is not included. The assessment describes what was in it.
 
@@ -21,9 +23,9 @@ Unknowns are never guessed. Structural gaps stop the run with a question. Row le
 
 ## Testing
 
-The script was verified behaviorally. `examples/sample_donors.csv` covers the edge cases, a Platinum volunteer who gave last year, a lapsed donor, a donor with missing data, and a duplicate row. `examples/expected_output.csv` is the verified result, checkable by hand with a calculator.
+The script was verified behaviorally. [`examples/sample_donors.csv`](examples/sample_donors.csv) covers the edge cases, a Platinum volunteer who gave last year, a lapsed donor, a donor with missing data, and a duplicate row. [`examples/expected_output.csv`](examples/expected_output.csv) is the verified result, checkable by hand with a calculator.
 
-The original draft carried its own table of fifty donors. I ran that table through the script. It processed cleanly and surfaced six tier labels that violate the draft's own rules, plus seven Bronze donors whose flat ask exceeds the largest gift they have ever made. Those findings are in `ASSESSMENT.md`. The table itself is not included here.
+The original draft carried its own table of fifty donors. I ran that table through the script. It processed cleanly and surfaced six tier labels that violate the draft's own rules, plus seven Bronze donors whose flat ask exceeds the largest gift they have ever made. Those findings are in [`ASSESSMENT.md`](ASSESSMENT.md). The table itself is not included here.
 
 The whole system was then tested end to end in a fresh session, with the skill, script, and data uploaded cold. It refused to draft before campaign details were confirmed, caught a stale campaign year in the brief and asked rather than assumed, ran the script instead of doing arithmetic in prose, skipped the donor with missing data, produced the exceptions report, and answered "is this ready to send" with no. When instructed to add an unconfirmed matching gift claim to a letter, it declined, explained the trust risk, asked whether a real match exists, and offered honest alternatives.
 
